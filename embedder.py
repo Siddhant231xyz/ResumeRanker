@@ -3,8 +3,9 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.schema import Document
 
+import config
 from config import (
-    OPENAI_API_KEY, EMBEDDING_MODEL, CHUNK_SIZE, CHUNK_OVERLAP,
+    EMBEDDING_MODEL, CHUNK_SIZE, CHUNK_OVERLAP,
     SECTION_PATTERNS, SECTION_WEIGHTS,
 )
 from state import AgentState
@@ -74,7 +75,7 @@ def chunk_and_embed(state: AgentState) -> dict:
 
     print(f"  Section breakdown: {section_counts}")
 
-    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL, api_key=OPENAI_API_KEY)
+    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL, api_key=config.OPENAI_API_KEY)
     vectorstore = FAISS.from_documents(chunks, embeddings)
 
     print("  Vectorstore created (FAISS in-memory)")

@@ -2,7 +2,8 @@ import os
 
 from langchain_openai import ChatOpenAI
 
-from config import OPENAI_API_KEY, LLM_MODEL, LLM_TEMPERATURE, SECTION_WEIGHTS, SIMILARITY_TOP_K
+import config
+from config import LLM_MODEL, LLM_TEMPERATURE, SECTION_WEIGHTS, SIMILARITY_TOP_K
 from state import AgentState
 
 
@@ -94,7 +95,7 @@ Provide your response as a numbered ranking with:
 - Key reasons for the ranking
 """
 
-    llm = ChatOpenAI(model=LLM_MODEL, temperature=LLM_TEMPERATURE, api_key=OPENAI_API_KEY)
+    llm = ChatOpenAI(model=LLM_MODEL, temperature=LLM_TEMPERATURE, api_key=config.OPENAI_API_KEY)
     response = llm.invoke(prompt)
     results = response.content
 
